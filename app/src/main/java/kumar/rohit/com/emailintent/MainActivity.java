@@ -5,18 +5,22 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.List;
+
+import static java.net.Proxy.Type.HTTP;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
-    Button mEmailButton, mCallButton;
+    Button mEmailButton, mCallButton, mSmsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mEmailButton.setOnClickListener(this);
         mCallButton.setOnClickListener(this);
+        mSmsButton.setOnClickListener(this);
     }
 
     // initView method definition
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mEmailButton = findViewById(R.id.email_button);
         mCallButton = findViewById(R.id.call_button);
+        mSmsButton = findViewById(R.id.sms_button);
+
     }
 
     @Override
@@ -63,8 +70,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 // callIntent method call
                 callIntent();
+                break;
+            case R.id.sms_button:
+                Toast.makeText(this, "Sms button cliced", Toast.LENGTH_SHORT).show();
+                // sendSMS method call
+                sendSMS();
+                break;
 
 
+
+        }
+    }
+
+    // sendSms method definition
+
+    private void sendSMS() {
+
+        Intent mSmsIntent = new Intent(Intent.ACTION_VIEW);
+        mSmsIntent.setData(Uri.parse("sms:"));
+        mSmsIntent.putExtra(Intent.EXTRA_TEXT, "HI");
+        mSmsIntent.putExtra("address",  "198");
+
+
+        boolean isIntentSafe = isIntentSafe(mSmsIntent);
+
+        // Intent choose for selecting the app from the app list
+        Intent chooser = Intent.createChooser(mSmsIntent, "Select the app to send SMS");
+        // if App is available then start the intent
+        if (isIntentSafe) {
+            startActivity(chooser);
         }
     }
 
