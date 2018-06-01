@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,8 +12,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.List;
-
-import static java.net.Proxy.Type.HTTP;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -59,20 +56,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.email_button:
 
-                Log.d(TAG, "onClick: Email Button Clicked");
+                Log.d(TAG, getString(R.string.text_email_button_clicked));
                 // emailIntent method call
                 emailIntent();
                 break;
 
             case R.id.call_button:
 
-                Log.d(TAG, "onClick: Call button Clicked");
+                Log.d(TAG, getString(R.string.text_call_button_clicked));
 
                 // callIntent method call
                 callIntent();
                 break;
             case R.id.sms_button:
-                Toast.makeText(this, "Sms button cliced", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.text_sms_button_clicked, Toast.LENGTH_SHORT).show();
                 // sendSMS method call
                 sendSMS();
                 break;
@@ -88,14 +85,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Intent mSmsIntent = new Intent(Intent.ACTION_VIEW);
         mSmsIntent.setData(Uri.parse("sms:"));
-        mSmsIntent.putExtra(Intent.EXTRA_TEXT, "HI");
-        mSmsIntent.putExtra("address",  "198");
+        mSmsIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.text_hi));
+        mSmsIntent.putExtra(getString(R.string.text_address), "198");
 
 
         boolean isIntentSafe = isIntentSafe(mSmsIntent);
 
         // Intent choose for selecting the app from the app list
-        Intent chooser = Intent.createChooser(mSmsIntent, "Select the app to send SMS");
+        Intent chooser = Intent.createChooser(mSmsIntent, getString(R.string.text_select_app));
         // if App is available then start the intent
         if (isIntentSafe) {
             startActivity(chooser);
@@ -114,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boolean isIntentSafe = isIntentSafe(mCallIntent);
 
         // Intent choose for selecting the app from the app list
-        Intent chooser = Intent.createChooser(mCallIntent, "Select App For call");
+        Intent chooser = Intent.createChooser(mCallIntent, getString(R.string.text_select_app_for_call));
         // if App is available then start the intent
         if (isIntentSafe) {
             startActivity(chooser);
@@ -145,15 +142,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType("text/plain");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"vivek9075@gmail.com"}); // recipients
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your Subject");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email Message");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.text_vivek9075)}); // recipients
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.text_subject));
+        emailIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.text_email_message));
 
         // Checking app availability to handle the intent
         boolean isIntentSafe = isIntentSafe(emailIntent);
 
         // Intent choose for selecting the app from the app list
-        Intent chooser = Intent.createChooser(emailIntent, "Send Mail");
+        Intent chooser = Intent.createChooser(emailIntent, getString(R.string.text_send_mail));
         // if App is available then start the intent
         if (isIntentSafe) {
             startActivity(chooser);

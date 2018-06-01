@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">ImplicitIntents</string>
     <string name="text_email">Email</string>
+    <string name="text_call">call</string>
+    <string name="text_sms">SMS</string>
+    <string name="text_call_button_clicked">onClick: Call button Clicked</string>
+    <string name="text_sms_button_clicked">Sms button cliced</string>
+    <string name="text_email_button_clicked">onClick: Email Button Clicked</string>
+    <string name="text_hi">HI</string>
+    <string name="text_address">address</string>
+    <string name="text_select_app">Select the app to send SMS</string>
+    <string name="text_select_app_for_call">Select App For call</string>
+    <string name="text_vivek9075">vivek9075@gmail.com</string>
+    <string name="text_subject">Your Subject</string>
+    <string name="text_email_message">Email Message</string>
+    <string name="text_send_mail">Send Mail</string>
 </resources>
