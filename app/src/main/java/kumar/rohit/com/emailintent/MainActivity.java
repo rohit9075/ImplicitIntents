@@ -148,10 +148,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Checking app availability to handle the intent
         boolean isIntentSafe = isIntentSafe(emailIntent);
 
-        // Intent choose for selecting the app from the app list
+        // Intent chooser for selecting the app from the app list
         Intent chooser = Intent.createChooser(emailIntent, getString(R.string.text_send_mail));
         // if App is available then start the intent
         if (isIntentSafe) {
+
             startActivity(chooser);
         }
     }
